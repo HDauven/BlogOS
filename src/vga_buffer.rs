@@ -32,3 +32,29 @@ impl ColorCode {
         ColorCode((background as u8) << 4 | (foreground as u8))
     }
 }
+
+/// An ASCII character and a `ColorCode` in the VGA text buffer
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[repr(C)]
+struct ScreenChar {
+    ascii_character: u8,
+    color_code: ColorCode,
+}
+
+/// Text buffer height
+const BUFFER_HEIGHT: usize = 25;
+/// Text buffer width
+const BUFFER_WIDTH: usize = 80;
+
+/// VGA text buffer
+#[repr(transparent)]
+struct Buffer {
+    chars: [[ScreenChar; BUFFER_WIDTH]; BUFFER_HEIGHT],
+}
+
+/// Writes ASCII bytes and strings to an underlying `Buffer`
+pub struct Writer {
+    column_position: usize,
+    color_code: ColorCode,
+    buffer: &'static mut Buffer,
+}
