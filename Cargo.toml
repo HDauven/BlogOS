@@ -20,6 +20,17 @@ x86_64 = "=0.14.7"
 uart_16550 = "=0.2.14"
 pic8259 = "=0.10.1"
 pc-keyboard = "=0.7.0"
+conquer-once = { version = "=0.2.1", default-features = false }
+
+[dependencies.crossbeam-queue]
+version = "=0.3.11"
+default-features = false
+features = ["alloc"]
+
+[dependencies.futures-util]
+version = "0.3.4"
+default-features = false
+features = ["alloc"]
 
 [dependencies.lazy_static]
 version = "=1.4"
